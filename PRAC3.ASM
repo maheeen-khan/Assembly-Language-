@@ -1,0 +1,60 @@
+DOSSEG
+.MODEL SMALL
+.STACK 100H
+.DATA
+
+MSG1 DB 'Capital alphabets : $'
+MSG2 DB 'Small alphabets : $'
+
+.CODE
+MAIN PROC
+MOV AX , @DATA
+MOV DS, AX
+
+MOV DX, OFFSET MSG1
+MOV AH, 9
+INT 21H
+
+MOV CX, 26
+MOV DX, 65
+
+L1:
+MOV AH, 2
+INT 21H
+
+INC DX
+
+LOOP L1
+
+;line change
+MOV DX,10
+MOV AH,2
+INT 21H
+
+MOV DX, 13
+MOV AH,2
+INT 21H
+
+MOV DX, OFFSET MSG2
+MOV AH,9
+INT 21H
+
+;small alphabets
+MOV CX, 26
+MOV DX, 97
+
+L2:
+MOV AH,2
+INT 21H
+
+INC DX
+
+
+LOOP L2
+
+MOV AH, 4CH
+INT 21H
+
+MAIN ENDP
+END MAIN
+
